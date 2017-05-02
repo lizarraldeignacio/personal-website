@@ -16,10 +16,17 @@ class SimpleItem extends Component {
                       {this.props.itemIcon}
                   </div>
               </div>
-              <div className="o-media__body  o-content__body">
-                  <h3>{this.props.itemTitle}</h3>
+              {this.props.itemLink ? (
+              <a href={this.props.itemLink} target="_blank" className="t-link-container o-media__body  o-content__body">
+                  <h3 className="t-link-container__item">
+                    {this.props.itemTitle}
+                  </h3>
                   <p>{this.props.itemText}</p>
-              </div>
+              </a>)
+            : (<div className="o-media__body  o-content__body">
+                <h3>{this.props.itemTitle}</h3>
+                <p>{this.props.itemText}</p>
+            </div>)}
           </div>
       </div>
     );

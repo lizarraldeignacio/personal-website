@@ -17,6 +17,7 @@ class SimpleList extends Component {
               key = {element["title"]}
               itemIcon = {this.props.itemIcon}
               itemClass = {this.props.itemClass}
+              itemLink = {element["link"]}
               itemTitle = {element["title"]}
               itemText = {element["description"]}
             />

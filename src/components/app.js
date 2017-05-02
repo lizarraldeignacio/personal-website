@@ -5,6 +5,7 @@ import SimpleList from './simple_list';
 import DecolineList from './decoline_list';
 import TimelineList from './timeline_list';
 import MediaList from './media_list';
+import _ from 'lodash';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import {
@@ -22,7 +23,6 @@ class App extends Component {
           <Header/>
           <Section
             sectionName={"Expertise"}
-            sectionDescription={"Batman would be jealous"}
           >
             <SimpleList
               elements={this.props.expertise}
@@ -153,12 +153,13 @@ class App extends Component {
 
 function mapStateToProps({ firebase }) {
   return {
-    publications: dataToJS(firebase, '/publications'),
+    //Patch, orderByChild is not working properly
+    publications: _.sortBy(dataToJS(firebase, '/publications'), (obj) => {return -obj.year;}),
     expertise: dataToJS(firebase, '/expertise'),
-    experience: dataToJS(firebase, '/experience'),
+    experience: _.sortBy(dataToJS(firebase, '/experience'), (obj) => {return -obj.endYear;}),
     education: dataToJS(firebase, '/education'),
-    awards: dataToJS(firebase, '/awards'),
-    projects: dataToJS(firebase, '/projects')
+    awards: _.sortBy(dataToJS(firebase, '/awards'), (obj) => {return -obj.year;}),
+    projects: _.sortBy(dataToJS(firebase, '/projects'), (obj) => {return -obj.year;})
   }
 }
 
