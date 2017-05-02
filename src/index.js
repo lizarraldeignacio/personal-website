@@ -10,10 +10,10 @@ import rootReducer from './reducers/index'
 
 // Firebase config
 const config = {
-  apiKey: '',
-  authDomain: '',
-  databaseURL: '',
-  storageBucket: ''
+  apiKey: 'AIzaSyCcTpqj24IYJFSzVlkAkh_OVUF6qPDt41M',
+  authDomain: 'mywebsite-8a1f0.firebaseapp.com',
+  databaseURL: 'https://mywebsite-8a1f0.firebaseio.com/',
+  storageBucket: 'mywebsite-8a1f0.appspot.com'
 }
 
 
