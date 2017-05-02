@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Header from './header';
 import Section from './section';
 import SimpleList from './simple_list';
+import DecolineList from './decoline_list';
 import TimelineList from './timeline_list';
+import MediaList from './media_list';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import {
@@ -45,6 +47,23 @@ class App extends Component {
             <TimelineList
               elements={this.props.experience}
               listClass={"a-experience-timeline  c-timeline  t-border-color"}
+            />
+          </Section>
+
+          <Section
+            sectionName={"Projects"}
+          >
+            <MediaList
+              elements={this.props.projects}
+              itemIcon={<i className="fa  fa-lg  fa-github-alt"></i>}
+            />
+          </Section>
+
+          <Section
+            sectionName={"Awards"}
+          >
+            <DecolineList
+              elements={this.props.awards}
             />
           </Section>
 
@@ -137,10 +156,12 @@ function mapStateToProps({ firebase }) {
     publications: dataToJS(firebase, '/publications'),
     expertise: dataToJS(firebase, '/expertise'),
     experience: dataToJS(firebase, '/experience'),
-    education: dataToJS(firebase, '/education')
+    education: dataToJS(firebase, '/education'),
+    awards: dataToJS(firebase, '/awards'),
+    projects: dataToJS(firebase, '/projects')
   }
 }
 
 export default compose(
-  firebaseConnect(['/publications', '/expertise', '/experience', '/education']),
+  firebaseConnect(['/publications', '/expertise', '/experience', '/education', '/awards', '/projects']),
   connect(mapStateToProps))(App)
