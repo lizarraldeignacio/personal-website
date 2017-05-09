@@ -1,19 +1,43 @@
 import React, { Component } from 'react';
-
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter, Link } from 'react-router-dom';
+import {
+  firebaseConnect,
+  pathToJS
+} from 'react-redux-firebase';
 
 class Header extends Component {
+
+  logout() {
+    this.props.firebase.logout().then(() => {
+      this.props.history.push("/");
+    });
+  }
 
   render() {
     return (
       <section className="o-section o-section--header  t-section  t-section--header">
-          <div className="c-header">
 
+          <div className="c-header">
+            <div className="div-inout">
+              { this.props.auth ?
+                <a
+                  href="#"
+                  onClick={this.logout.bind(this)}
+                  className="c-social-button  t-social-button">
+                    <i className="fa fa-lg fa-sign-out" aria-hidden="true"></i>
+                </a> :
+                <Link
+                  to="/login"
+                  className="c-social-button  t-social-button">
+                    <i className="fa fa-lg fa-sign-in" aria-hidden="true"></i>
+                </Link>}
+            </div>
               <div className="o-section__header-bg  t-section__header"></div>
               <div className="o-section__content-bg  t-section__content"></div>
-
               <div className="o-container">
                   <div className="o-section__container">
-
                       <header className="o-section__header  c-header__header  t-section__header">
                           <div className="c-header__inner-header">
 
@@ -109,6 +133,7 @@ class Header extends Component {
                               </div>
 
                           </div>
+
                       </div>
 
                   </div>
@@ -121,4 +146,10 @@ class Header extends Component {
   }
 }
 
-export default Header;
+function mapStateToProps({ firebase }) {
+  return {
+    auth: pathToJS(firebase, 'auth')
+  };
+}
+
+export default withRouter(compose(connect(mapStateToProps), firebaseConnect())(Header));

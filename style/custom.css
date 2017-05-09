@@ -5,3 +5,50 @@
  */
 
 /*# sourceMappingURL=custom.css.map */
+
+div.well{
+  height: 250px;
+}
+
+.Absolute-Center {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.Absolute-Center.is-Responsive {
+  width: 50%;
+  height: 50%;
+  min-width: 200px;
+  max-width: 400px;
+  padding: 40px;
+}
+
+.div-inout {
+  display: inline-block;
+  padding-top: 10px;
+  margin-left: 95%;
+}
+
+@media (max-width: 1024px) {
+  .div-inout {
+    margin-left: 92% !important;
+  }
+}
+
+@media (max-width: 512px) {
+  .div-inout {
+    margin-left: 85% !important;
+  }
+}
+
+.btn-inout {
+  float: right;
+}
+
+#g-recaptcha {
+    margin-left: -150px;
+    padding-left: 50%; // Padding can't be negative
+}
+
+#rc-imageselect {transform:scale(0.77);-webkit-transform:scale(0.77);transform-origin:0 0;-webkit-transform-origin:0 0;}
