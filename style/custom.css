@@ -10,24 +10,11 @@ div.well{
   height: 250px;
 }
 
-.Absolute-Center {
-  margin: auto;
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-}
-
-.Absolute-Center.is-Responsive {
-  width: 50%;
-  height: 50%;
-  min-width: 200px;
-  max-width: 400px;
-  padding: 40px;
-}
-
 .div-inout {
   display: inline-block;
-  padding-top: 10px;
+  padding-top: 5px;
   margin-left: 95%;
+  padding-bottom: 5px;
 }
 
 @media (max-width: 1024px) {
@@ -44,6 +31,105 @@ div.well{
 
 .btn-inout {
   float: right;
+}
+
+.valign-wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.valign {
+  width: 100%;
+}
+
+.fa-certificate {
+  color: #1e88e5;
+}
+
+.fa-file-text {
+  color: #1e88e5;
+}
+
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+
+.ReactModal__Overlay.ReactModal__Overlay--after-open {
+  z-index: 4;
+}
+
+#login-left {
+  width: 30%;
+  overflow: hidden;
+}
+
+#login-right {
+  background: #fff;
+  width: 70%;
+  overflow: hidden;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+@media (max-width: 1024px) {
+  #login-right {
+    margin-right: 0;
+    margin-left: auto;
+  }
+}
+
+#login-button {
+  text-align: right;
+  float: right;
+}
+
+.center-btn {
+  text-align: center;
+}
+
+/* label focus color */
+ .input-field input:focus + label {
+   color: #1e88e5 !important;
+ }
+
+ /* label underline focus color */
+ .row .input-field input:focus {
+   border-bottom: 1px solid #1e88e5 !important;
+   box-shadow: 0 1px 0 0 #1e88e5 !important;*/
+ }
+
+ .inline-elem {
+   display: inline;
+   overflow: hidden;
+ }
+
+ .inline-elem-right {
+   display: inline;
+   margin-left: auto;
+   margin-right: 0;
+   overflow: hidden;
+ }
+
+.btn-add {
+  margin-left: 10px;
+}
+
+.btn-right {
+  margin-left: 10px;
+  float: right;
+}
+
+.btn-left {
+  margin-right: 5px;
+}
+
+.btn {
+    color: #910000;
+}
+
+.btn-small {
+    font-size: 5px;
 }
 
 #g-recaptcha {

@@ -37,7 +37,7 @@ h6 {
 a,
 .t-link-container .t-link-container__item,
 .t-link-container:hover .t-link-container__item--blended {
-  color: #07afe0;
+  color: #1e88e5;
 }
 
 /* Hover Links */
@@ -45,7 +45,7 @@ a:hover,
 a:focus,
 a:active,
 .t-link-container:hover .t-link-container__item {
-  color: #07afe0;
+  color: #1e88e5;
 }
 
 /* Horizontal Rulers */
@@ -62,18 +62,18 @@ hr,
 /* Primary Color */
 .t-primary-color,
 .t-primary-color-line {
-  color: #07afe0;
+  color: #1e88e5;
 }
 
 .t-primary-bg,
 .t-primary-color-line {
-  background: #07afe0;
+  background: #1e88e5;
 }
 
 /* Preloader */
 .t-preloader__spinner:not(:required):before {
-  border-top-color: #07afe0;
-  border-bottom-color: #07afe0;
+  border-top-color: #1e88e5;
+  border-bottom-color: #1e88e5;
 }
 
 /* Brand Colors */
@@ -82,7 +82,7 @@ hr,
 }
 
 .t-title__second-word {
-  color: #07afe0;
+  color: #1e88e5;
 }
 
 .t-sub-title {
@@ -116,14 +116,6 @@ hr,
   color: #e0e0e0;
 }
 
-.fa-certificate {
-  color: #07afe0;
-}
-
-.fa-file-text {
-  color: #07afe0;
-}
-
 /* Social Buttons */
 .t-social-button {
   background: #ededed;
@@ -139,7 +131,7 @@ hr,
 }
 
 .t-social-button:hover .fa {
-  color: #07afe0;
+  color: #1e88e5;
 }
 
 /* Image Overlay */

@@ -1,12 +1,29 @@
 import React, { Component } from 'react';
 import SimpleItem from './simple_item';
 import _ from 'lodash';
+import { firebaseConnect } from 'react-redux-firebase';
 
+/**
+  SimpleList list of Simple elements
 
+  Params:
+    elements: The elements that the list will contain
+    itemClass: The class of the elements that the list will contain
+    path: The path of the firebase database of the list
+    itemIcon: The icon of each element
+    itemIconRemove: The icon of the remove action of each element
+    auth: A flag that indicates if the user is authenticated or not
+**/
 class SimpleList extends Component {
 
   constructor(props) {
     super(props);
+  }
+
+  remove(title) {
+      const key = _.findKey(this.props.elements,
+              (item) => {return title == item["title"]});
+      this.props.firebase.remove(`${this.props.path}/${key}`);
   }
 
   renderList() {
@@ -20,6 +37,8 @@ class SimpleList extends Component {
               itemLink = {element["link"]}
               itemTitle = {element["title"]}
               itemText = {element["description"]}
+              remove = {this.remove.bind(this)}
+              auth = {this.props.auth}
             />
           );
         })
@@ -35,4 +54,4 @@ class SimpleList extends Component {
   }
 }
 
-export default SimpleList;
+export default firebaseConnect()(SimpleList);

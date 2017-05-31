@@ -5,16 +5,26 @@ import SimpleList from './simple_list';
 import DecolineList from './decoline_list';
 import TimelineList from './timeline_list';
 import MediaList from './media_list';
+import {
+  expertiseFields,
+  experienceFields,
+  awardsFields,
+  educationFields,
+  projectsFields,
+  papersFields} from './section_fields.js';
 import _ from 'lodash';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import {
   firebaseConnect,
   dataToJS,
-  pathToJS
+  pathToJS,
+  orderedToJS
 } from 'react-redux-firebase';
 
 class MainPage extends Component {
+
+  //const customStyle = ;
 
   constructor(props) {
     super(props);
@@ -22,72 +32,107 @@ class MainPage extends Component {
 
   render () {
     return (
-      <div>
+      <div id="main">
         <div className="c-preloader  js-preloader">
             <div className="c-preloader__spinner  t-preloader__spinner"></div>
         </div>
-        <div className="c-main-container  js-main-container">
+
+        <div id="mainContainer" className="c-main-container  js-main-container">
             <Header/>
 
             <Section
-              sectionName={"Expertise"}
+              sectionName = {"Expertise"}
+              fields = {expertiseFields}
+              auth = {this.props.auth}
+              path = '/expertise'
             >
               <SimpleList
-                elements={this.props.expertise}
-                itemClass={"o-grid__col-sm-6"}
-                itemIcon={<i className="fa fa-certificate" aria-hidden="true"></i>}
+                elements = {this.props.expertise}
+                path = '/expertise'
+                itemClass = {"o-grid__col-sm-6"}
+                itemIcon = {<i className="fa fa-certificate" aria-hidden="true"></i>}
+                auth = {this.props.auth}
               />
             </Section>
 
             <Section
-              sectionName={"Publications"}
+              sectionName = {"Publications"}
+              fields = {papersFields}
+              auth = {this.props.auth}
+              path = '/publications'
             >
               <SimpleList
-                elements={this.props.publications}
-                itemClass={"o-grid__col-sm-12"}
-                itemIcon={<i className="fa fa-file-text" aria-hidden="true"></i>}
+                elements = {this.props.publications}
+                path = '/publications'
+                itemClass = {"o-grid__col-sm-12"}
+                itemIcon = {<i className="fa fa-file-text" aria-hidden="true"></i>}
+                auth = {this.props.auth}
               />
             </Section>
 
             <Section
-              sectionName={"Experience"}
+              sectionName = {"Experience"}
+              fields = {experienceFields}
+              auth = {this.props.auth}
+              path = '/experience'
             >
+
               <TimelineList
-                elements={this.props.experience}
-                listClass={"a-experience-timeline  c-timeline  t-border-color"}
+                elements = {this.props.experience}
+                path = '/experience'
+                listClass = {"a-experience-timeline  c-timeline  t-border-color"}
+                auth = {this.props.auth}
               />
             </Section>
 
             <Section
-              sectionName={"Projects"}
+              sectionName = {"Projects"}
+              fields = {projectsFields}
+              auth = {this.props.auth}
+              path = '/projects'
             >
               <MediaList
-                elements={this.props.projects}
-                itemIcon={<i className="fa  fa-lg  fa-github-alt"></i>}
+                elements = {this.props.projects}
+                path = '/projects'
+                auth = {this.props.auth}
+                itemIcon = {<i className="fa  fa-github-alt"></i>}
               />
             </Section>
 
             <Section
-              sectionName={"Awards"}
+              sectionName = {"Awards"}
+              fields = {awardsFields}
+              auth = {this.props.auth}
+              path = '/awards'
             >
               <DecolineList
-                elements={this.props.awards}
+                elements = {this.props.awards}
+                path = '/awards'
+                auth = {this.props.auth}
+                itemIconRemove = {this.props.auth && <i className="fa fa-minus" aria-hidden="true"></i>}
               />
             </Section>
 
             <Section
-              sectionName={"Education"}>
+              sectionName = {"Education"}
+              fields = {educationFields}
+              auth = {this.props.auth}
+              path = '/education'
+              >
               <TimelineList
-                elements={this.props.education}
-                listClass={"a-education-timeline  c-timeline  t-border-color  o-section__full-top-space"}
+                elements = {this.props.education}
+                path = '/education'
+                listClass = {"a-education-timeline  c-timeline  t-border-color  o-section__full-top-space"}
+                auth = {this.props.auth}
               />
             </Section>
 
 
             <Section
-              sectionName={"Contact"}
-              sectionDescription={"Send me an email!"}
-              additionalClass={"o-section--footer"}
+              sectionName = {"Contact"}
+              sectionDescription = {"Send me an email!"}
+              additionalClass = {"o-section--footer"}
+              auth = {false}
             >
               <div className="c-footer__contact">
                   <div className="o-grid">
@@ -162,14 +207,16 @@ class MainPage extends Component {
 function mapStateToProps({ firebase }) {
   return {
     //Patch, orderByChild is not working properly
-    publications: _.sortBy(dataToJS(firebase, '/publications'), (obj) => {return -obj.year;}),
+    auth: pathToJS(firebase, 'auth'),
+    //publications: _.sortBy(dataToJS(firebase, '/publications'), (obj) => {return -obj.year;}),
+    publications: orderedToJS(firebase, '/publications'),
     expertise: dataToJS(firebase, '/expertise'),
-    experience: _.sortBy(dataToJS(firebase, '/experience'), (obj) => {return -obj.endYear;}),
+    experience: dataToJS(firebase, '/experience'),
     education: dataToJS(firebase, '/education'),
-    awards: _.sortBy(dataToJS(firebase, '/awards'), (obj) => {return -obj.year;}),
-    projects: _.sortBy(dataToJS(firebase, '/projects'), (obj) => {return -obj.year;})
+    awards: dataToJS(firebase, '/awards'),
+    projects: dataToJS(firebase, '/projects')
   };
 }
 
 export default compose(connect(mapStateToProps),
-firebaseConnect(['/publications', '/expertise', '/experience', '/education', '/awards', '/projects']))(MainPage);
+firebaseConnect(['/publications#orderByChild=year', '/expertise', '/experience', '/education', '/awards', '/projects']))(MainPage);

@@ -1,12 +1,31 @@
 import React, { Component } from 'react';
 import TimelineItem from './timeline_item';
 import _ from 'lodash';
+import { firebaseConnect } from 'react-redux-firebase';
 
+/**
+  TimelineList list of Timeline elements
 
+  Params:
+    elements: The elements that the list will contain
+    path: The path of the firebase database of the list
+    listClass: The CSS class of the list
+    itemIcon: The icon of each element
+    itemIconRemove: The icon of the remove action of each element
+    auth: A flag that indicates if the user is authenticated or not
+**/
 class TimelineList extends Component {
 
   constructor(props) {
     super(props);
+  }
+
+  remove(companyName, date) {
+      const key = _.findKey(this.props.elements,
+              (item) => {
+                return companyName == item["company"] && date == item["date"];
+              });
+      this.props.firebase.remove(`${this.props.path}/${key}`);
   }
 
   renderList() {
@@ -20,6 +39,8 @@ class TimelineList extends Component {
               date = {element["date"]}
               description = {element["description"]}
               location = {element["location"]}
+              remove = {this.remove.bind(this)}
+              auth = {this.props.auth}
             />
           );
         })
@@ -35,4 +56,4 @@ class TimelineList extends Component {
   }
 }
 
-export default TimelineList;
+export default firebaseConnect()(TimelineList);

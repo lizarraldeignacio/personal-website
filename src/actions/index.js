@@ -4,7 +4,7 @@ import {
        } from './types';
 
 const VERIFY_URL = 'https://us-central1-mywebsite-8a1f0.cloudfunctions.net/verifyCaptcha';
-const GET_IP_URL = 'http://ipinfo.io';
+const GET_IP_URL = 'https://freegeoip.net/json/';
 
 export function verifyReCaptcha(response) {
   const request = axios.get(`${GET_IP_URL}`).then(ipResponse => {
