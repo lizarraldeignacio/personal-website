@@ -21,8 +21,8 @@ class SimpleList extends Component {
   }
 
   remove(title) {
-      const key = _.findKey(this.props.elements,
-              (item) => {return title == item["title"]});
+      const key = _.find(this.props.elements,
+              (item) => {return title == item["title"]}).key;
       this.props.firebase.remove(`${this.props.path}/${key}`);
   }
 

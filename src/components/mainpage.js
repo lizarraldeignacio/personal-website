@@ -24,8 +24,6 @@ import {
 
 class MainPage extends Component {
 
-  //const customStyle = ;
-
   constructor(props) {
     super(props);
   }
@@ -206,11 +204,9 @@ class MainPage extends Component {
 
 function mapStateToProps({ firebase }) {
   return {
-    //Patch, orderByChild is not working properly
     auth: pathToJS(firebase, 'auth'),
-    //publications: _.sortBy(dataToJS(firebase, '/publications'), (obj) => {return -obj.year;}),
     publications: orderedToJS(firebase, '/publications'),
-    expertise: dataToJS(firebase, '/expertise'),
+    expertise: orderedToJS(firebase, '/expertise'),
     experience: dataToJS(firebase, '/experience'),
     education: dataToJS(firebase, '/education'),
     awards: dataToJS(firebase, '/awards'),
