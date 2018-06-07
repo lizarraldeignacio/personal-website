@@ -31,10 +31,6 @@ class MainPage extends Component {
   render () {
     return (
       <div id="main">
-        <div className="c-preloader  js-preloader">
-            <div className="c-preloader__spinner  t-preloader__spinner"></div>
-        </div>
-
         <div id="mainContainer" className="c-main-container  js-main-container">
             <Header/>
 
